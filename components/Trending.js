@@ -3,7 +3,7 @@ import { View,Image ,Text,TouchableOpacity, ScrollView} from 'react-native'
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 
-export default function Trending({ gifs }) {
+export default function Trending({ gifs, navigation }) {
     return (
         
         <ScrollView>
@@ -12,16 +12,16 @@ export default function Trending({ gifs }) {
                 key={index}
                 activeOpacity={1}
                 style={{ marginBottom: 30 }}
-        //   onPress={() =>
-        //     navigation.navigate("RestaurantDetail", {
-        //       name: restaurant.name,
-        //       image: restaurant.image_url,
-        //       price: restaurant.price,
-        //       reviews: restaurant.review_count,
-        //       rating: restaurant.rating,
-        //       categories: restaurant.categories,
-        //     })
-        //   }
+                onPress={() =>
+                navigation.navigate("Details", {
+                    title: gif.title,
+                    images: gif.images.original.url,
+                    trending_datetime: gif.trending_datetime,
+                    create_datetime: gif.create_datetime,
+                    user: gif.user.username,
+                    rating: gif.rating,
+                })
+          }
             >
           <View
             style={{ marginTop: 10, padding: 15, backgroundColor: "white" }}

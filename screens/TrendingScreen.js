@@ -6,7 +6,7 @@ import Categories from '../components/Categories';
 import Trending from '../components/Trending'
 import BottomTabs from '../components/BottomTabs'
 
-export default function TrendingScreen() {
+export default function TrendingScreen({ navigation }) {
     const [gifs, setGifs] = useState([]);
     const [cat, setCat] = useState([]);
     useEffect(()=> {
@@ -32,7 +32,7 @@ export default function TrendingScreen() {
             <Header />
             <SearchBar />
             <Categories list={cat}/>
-            <Trending gifs={gifs}/>
+            <Trending gifs={gifs} navigation={navigation}/>
             <BottomTabs/>
         </SafeAreaView> 
         
