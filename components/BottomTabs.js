@@ -14,9 +14,7 @@ export default function BottomTabs() {
     >
       <Icon icon="home" text="Home" />
       <Icon icon="search" text="Browse" />
-      <Icon icon="shopping-bag" text="Grocery" />
-      <Icon icon="receipt" text="Orders" />
-      <Icon icon="user" text="Account" />
+      <Icon icon="user" text="Favourites" />
     </View>
     )
 }

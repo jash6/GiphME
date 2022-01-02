@@ -18,8 +18,10 @@ export default function Trending({ gifs, navigation }) {
                     images: gif.images.original.url,
                     trending_datetime: gif.trending_datetime,
                     create_datetime: gif.create_datetime,
-                    user: gif.user.username,
+                    username: gif.user.username,
+                    user_image: gif.user.avatar_url,
                     rating: gif.rating,
+                    navigation: navigation,
                 })
           }
             >
