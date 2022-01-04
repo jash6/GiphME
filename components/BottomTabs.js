@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, TouchableOpacity } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
-export default function BottomTabs() {
+export default function BottomTabs({navigation}) {
     return (
         <View
       style={{
@@ -12,14 +12,14 @@ export default function BottomTabs() {
         justifyContent: "space-between",
       }}
     >
-      <Icon icon="home" text="Home" />
-      <Icon icon="search" text="Browse" />
-      <Icon icon="user" text="Favourites" />
+      <Icon icon="home" text="Home" navigation={navigation} />
+      <Icon icon="search" text="Browse" navigation={navigation} />
+      <Icon icon="user" text="Favourites" navigation={navigation}/>
     </View>
     )
 }
 const Icon = (props) => (
-    <TouchableOpacity>
+    <TouchableOpacity >
       <View>
         <FontAwesome5
           name={props.icon}

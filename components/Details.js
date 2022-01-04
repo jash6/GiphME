@@ -3,9 +3,9 @@ import { View, Text,Image,SafeAreaView,TouchableOpacity } from 'react-native'
 import { Divider } from "react-native-elements";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import BottomTabs from './BottomTabs';
-
+import firebase from '../firebase'
 export default function Details(props) {
-    const { title, images, trending_datetime, create_datetime, username,user_url,rating,navigation } =
+    const { title, images, trending_datetime, create_datetime, username,user_url,rating,navigation} =
     props.route.params;
     return (
         <SafeAreaView>
