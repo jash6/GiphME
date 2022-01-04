@@ -8,30 +8,23 @@ import {
   Button,
 } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import firebase from "../firebase";
 import { useSelector, useDispatch } from "react-redux";
 import { addFav } from "../redux/actions";
 
 export default function Trending({ navigation }) {
   const dispatch = useDispatch();
 
-  useEffect(() => {}, [gifs]);
+  useEffect(() => {}, [gifs, filtered, items]);
 
-  const { gifs, favourites } = useSelector((state) => state.userReducer);
-  // const [fav, setFav] = useState(0);
-  console.log(favourites.length);
-  const onPressHandler = (title, image) => {
-    const db = firebase.firestore();
-    db.collection("favourites").add({
-      title: title,
-      image: image,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-    });
-    // setFav(fav + 1);
-  };
+  const { gifs, favourites, filtered } = useSelector(
+    (state) => state.userReducer
+  );
+
+  let items = [];
+  filtered.result.length > 0 ? (items = filtered.result) : (items = gifs);
   return (
     <ScrollView>
-      {gifs.map((gif, index) => (
+      {items.map((gif, index) => (
         <TouchableOpacity
           key={index}
           activeOpacity={1}

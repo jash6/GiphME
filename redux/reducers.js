@@ -1,9 +1,15 @@
-import { ADD_FAV, GIFS_LIST_SUCCESS, GIFS_LIST_FAIL } from "./actions";
+import {
+  ADD_FAV,
+  GIFS_LIST_SUCCESS,
+  GIFS_LIST_FAIL,
+  SEARCH_GIFS,
+} from "./actions";
 
 const initialState = {
   gifs: [],
   loading: true,
   favourites: [],
+  filtered: [],
 };
 
 function userReducer(state = initialState, action) {
@@ -16,6 +22,11 @@ function userReducer(state = initialState, action) {
       return {
         ...state,
         favourites: [...state.favourites, action.payload],
+      };
+    case SEARCH_GIFS:
+      return {
+        ...state,
+        filtered: action.payload,
       };
     default:
       return state;

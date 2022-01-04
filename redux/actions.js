@@ -1,10 +1,10 @@
-export const GIFS_LIST_REQUEST = "GIFS_LIST_REQUEST";
 export const GIFS_LIST_SUCCESS = "GIFS_LIST_SUCCESS";
 export const GIFS_LIST_FAIL = "GIFS_LIST_FAIL";
 export const SEARCH_GIFS = "SEARCH_GIFS";
 export const ADD_FAV = "ADD_FAV";
 export const REMOVE_FAV = "REMOVE_FAV";
 import firebase from "../firebase";
+import { Store } from "./store";
 
 const API_KEY = "2rvMyZozhtLPx7fJ3kL9sYtxT9Xwmw0R";
 const BASE_URL = "http://api.giphy.com/v1/gifs/trending";
@@ -48,5 +48,17 @@ export const addFav = (item) => (dispatch) => {
   dispatch({
     type: ADD_FAV,
     payload: gif,
+  });
+};
+
+export const search = (text) => (dispatch) => {
+  const gifs2 = Store.getState().userReducer.gifs;
+  const result = gifs2.filter((x) => x.title.includes(text));
+  const res = {
+    result: result,
+  };
+  dispatch({
+    type: SEARCH_GIFS,
+    payload: res,
   });
 };
