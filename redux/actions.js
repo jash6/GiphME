@@ -62,7 +62,6 @@ export const getFav = () => async (dispatch) => {
   const data = await response.get();
   data.forEach((item) => {
     let j = item.data();
-    // console.log(j);
     collection.push(j);
   });
 
@@ -83,7 +82,6 @@ export const removeFav = (item) => async (dispatch) => {
   response.get().then(function (querySnapshot) {
     querySnapshot.forEach(function (doc) {
       const favs = Store.getState().userReducer.favourites;
-
       const res = favs.filter((x) => x.title !== doc.data().title);
       const result = {
         res: res,

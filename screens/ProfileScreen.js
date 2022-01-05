@@ -29,7 +29,6 @@ export default function ProfileScreen() {
             <View
               style={{ marginTop: 10, padding: 15, backgroundColor: "white" }}
             >
-              {/* <GiphImage image={gif.images.original.url}  /> */}
               {console.log(gif.gif.images.preview_gif)}
               <Image
                 source={{
@@ -37,7 +36,7 @@ export default function ProfileScreen() {
                 }}
                 style={{ width: "100%", height: 180 }}
               />
-              {/* <GiphInfo name={gif.title} image={gif.images.original.url} rating={gif.rating} setFav={setFav}/> */}
+
               <View
                 style={{
                   flexDirection: "row",

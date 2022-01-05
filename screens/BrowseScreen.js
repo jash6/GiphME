@@ -24,35 +24,6 @@ export default function BrowseScreen() {
   useEffect(() => {}, [searched]);
   console.log(searched);
   return (
-    // <SafeAreaView style={styles.view}>
-    //   <TextInput
-    //     placeholder="Search Giphy"
-    //     placeholderTextColor="#000"
-    //     style={styles.textInput}
-    //     value={term}
-    //     onChangeText={updateTerm}
-    //   />
-    //   <AntDesign
-    //     name="check"
-    //     size={20}
-    //     color="black"
-    //     marginLeft={50}
-    //     style={{ padding: 1 }}
-    //     onPress={() => {
-    //       dispatch(browse(term));
-    //     }}
-    //   />
-    //   <FlatList
-    //     data={searched}
-    //     renderItem={({ item }) => (
-    //       <Image
-    //         resizeMode="contain"
-    //         style={styles.image}
-    //         source={{ uri: item.images.original.url }}
-    //       />
-    //     )}
-    //   />
-    // </SafeAreaView>
     <View style={{ marginTop: 50 }}>
       <View style={styles.container}>
         <View
@@ -60,14 +31,13 @@ export default function BrowseScreen() {
             !clicked ? styles.searchBar__unclicked : styles.searchBar__clicked
           }
         >
-          {/* search Icon */}
           <Feather
             name="search"
             size={20}
             color="black"
             style={{ marginLeft: 1 }}
           />
-          {/* Input field */}
+
           <TextInput
             style={styles.input}
             placeholder="Search"
@@ -77,7 +47,7 @@ export default function BrowseScreen() {
               setClicked(true);
             }}
           />
-          {/* cross Icon, depending on whether the search bar is clicked or not */}
+
           {clicked && (
             <Entypo
               name="cross"
@@ -90,7 +60,7 @@ export default function BrowseScreen() {
             />
           )}
         </View>
-        {/* cancel button, depending on whether the search bar is clicked or not */}
+
         {clicked && (
           <View>
             <Button
