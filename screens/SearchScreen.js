@@ -10,11 +10,11 @@ import {
 export default function SearchScreen() {
   const [gifs, setGifs] = useState([]);
   const [term, updateTerm] = useState("");
-  async function fetchGifs() {
+  async function fetchGifs(props) {
     try {
       const API_KEY = "2rvMyZozhtLPx7fJ3kL9sYtxT9Xwmw0R";
       const BASE_URL = "api.giphy.com/v1/gifs/search";
-      const resJson = await fetch(`${BASE_URL}?api_key=${API_KEY}&q=${term}`);
+      const resJson = await fetch(`${BASE_URL}?api_key=${API_KEY}&q=${props}`);
       const res = await resJson.json();
       setGifs(res.data);
     } catch (error) {
@@ -22,8 +22,7 @@ export default function SearchScreen() {
     }
   }
   function onEdit(newTerm) {
-    updateTerm(newTerm);
-    fetchGifs();
+    fetchGifs(newTerm);
   }
   return (
     <SafeAreaView style={styles.view}>
@@ -33,6 +32,7 @@ export default function SearchScreen() {
         style={styles.textInput}
         value={term}
         onChangeText={updateTerm}
+        onSubmitEditing={() => onEdit(term)}
       />
       <Flatlist
         data={gifs}
@@ -47,6 +47,7 @@ export default function SearchScreen() {
     </SafeAreaView>
   );
 }
+
 const styles = StyleSheet.create({
   view: {
     alignItems: "center",

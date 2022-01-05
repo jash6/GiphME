@@ -6,6 +6,7 @@ import TrendingScreen from "./screens/TrendingScreen";
 import Details from "./components/Details";
 import SearchScreen from "./screens/SearchScreen";
 import ProfileScreen from "./screens/ProfileScreen";
+import BrowseScreen from "./screens/BrowseScreen";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 export default function RootNavigation() {
@@ -57,7 +58,7 @@ export default function RootNavigation() {
         }}
       >
         <Tab.Screen name="Home" component={StackScreen} />
-        <Tab.Screen name="Browse" component={SearchScreen} />
+        <Tab.Screen name="Browse" component={BrowseScreen} />
         <Tab.Screen name="Profile" component={ProfileScreen} />
       </Tab.Navigator>
     </NavigationContainer>

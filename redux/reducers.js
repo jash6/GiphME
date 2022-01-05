@@ -3,6 +3,8 @@ import {
   GET_FAV,
   GIFS_LIST_SUCCESS,
   GIFS_LIST_FAIL,
+  GIFS_BROWSE_SUCCESS,
+  GIFS_BROWSE_FAIL,
   SEARCH_GIFS,
   REMOVE_FAV,
 } from "./actions";
@@ -12,6 +14,7 @@ const initialState = {
   loading: true,
   filtered: [],
   favourites: [],
+  searched: [],
 };
 
 function userReducer(state = initialState, action) {
@@ -39,6 +42,16 @@ function userReducer(state = initialState, action) {
       return {
         ...state,
         filtered: action.payload.result,
+      };
+    case GIFS_BROWSE_SUCCESS:
+      return {
+        ...state,
+        searched: action.payload.data,
+      };
+    case GIFS_BROWSE_FAIL:
+      return {
+        ...state,
+        error: action.payload,
       };
     default:
       return state;

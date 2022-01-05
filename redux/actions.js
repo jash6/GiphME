@@ -4,6 +4,8 @@ export const SEARCH_GIFS = "SEARCH_GIFS";
 export const ADD_FAV = "ADD_FAV";
 export const GET_FAV = "GET_FAV";
 export const REMOVE_FAV = "REMOVE_FAV";
+export const GIFS_BROWSE_SUCCESS = "GIFS_BROWSE_SUCCESS";
+export const GIFS_BROWSE_FAIL = "GIFS_BROWSE_FAIL";
 import firebase from "../firebase";
 import { Store } from "./store";
 
@@ -107,4 +109,29 @@ export const search = (text) => (dispatch) => {
     type: SEARCH_GIFS,
     payload: res,
   });
+};
+
+export const browse = (text) => async (dispatch) => {
+  try {
+    const result = await fetch(
+      `http://api.giphy.com/v1/gifs/search?api_key=2rvMyZozhtLPx7fJ3kL9sYtxT9Xwmw0R&q=${text}`
+    );
+    const json = await result.json();
+    if (json) {
+      dispatch({
+        type: GIFS_BROWSE_SUCCESS,
+        payload: json,
+      });
+    } else {
+      console.log("Unable to fetch!");
+    }
+  } catch (error) {
+    dispatch({
+      type: GIFS_BROWSE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
 };
