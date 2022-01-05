@@ -44,7 +44,7 @@ export default function TrendingScreen({ navigation }) {
       <SearchBar />
       {/* <Categories /> */}
       <Trending navigation={navigation} />
-      <BottomTabs navigation={navigation} />
+      {/* <BottomTabs navigation={navigation} /> */}
     </SafeAreaView>
   );
 }
