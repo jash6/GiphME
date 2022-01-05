@@ -14,14 +14,23 @@ import { addFav } from "../redux/actions";
 export default function Trending({ navigation }) {
   const dispatch = useDispatch();
 
-  useEffect(() => {}, [gifs, filtered, items]);
+  useEffect(() => {}, [gifs, filtered, items, favourites]);
 
   const { gifs, favourites, filtered } = useSelector(
     (state) => state.userReducer
   );
 
+  let exist = [];
+  favourites.map((x) => {
+    gifs.map((y) => {
+      if (x.title === y.title) {
+        exist.push(y);
+      }
+    });
+  });
+
   let items = [];
-  filtered.result.length > 0 ? (items = filtered.result) : (items = gifs);
+  filtered.length > 0 ? (items = filtered) : (items = gifs);
   return (
     <ScrollView>
       {items.map((gif, index) => (
@@ -35,10 +44,8 @@ export default function Trending({ navigation }) {
               images: gif.images.original.url,
               trending_datetime: gif.trending_datetime,
               create_datetime: gif.create_datetime,
-              username: gif.user.username,
-              user_image: gif.user.avatar_url,
               rating: gif.rating,
-              navigation: navigation,
+              gif: gif,
             })
           }
         >
@@ -70,7 +77,9 @@ export default function Trending({ navigation }) {
                 <MaterialCommunityIcons name="heart-outline" size={25} color="#fff" />
               </TouchableOpacity>: <TouchableOpacity style={{ position: "absolute", right: 20, top: 20 }}>
               </TouchableOpacity>} */}
-              {favourites.length < 5 ? (
+              {favourites.includes(gif) || exist.includes(gif) ? (
+                <Button title="Fav" />
+              ) : favourites.length < 5 ? (
                 <Button
                   title="Add"
                   onPress={() => {

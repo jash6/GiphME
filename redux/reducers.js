@@ -1,5 +1,6 @@
 import {
   ADD_FAV,
+  GET_FAV,
   GIFS_LIST_SUCCESS,
   GIFS_LIST_FAIL,
   SEARCH_GIFS,
@@ -8,8 +9,8 @@ import {
 const initialState = {
   gifs: [],
   loading: true,
-  favourites: [],
   filtered: [],
+  favourites: [],
 };
 
 function userReducer(state = initialState, action) {
@@ -23,10 +24,16 @@ function userReducer(state = initialState, action) {
         ...state,
         favourites: [...state.favourites, action.payload],
       };
+    case GET_FAV:
+      return {
+        ...state,
+        favourites: action.payload,
+      };
+
     case SEARCH_GIFS:
       return {
         ...state,
-        filtered: action.payload,
+        filtered: action.payload.result,
       };
     default:
       return state;

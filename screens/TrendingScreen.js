@@ -6,15 +6,18 @@ import Categories from "../components/Categories";
 import Trending from "../components/Trending";
 import BottomTabs from "../components/BottomTabs";
 import { useSelector, useDispatch } from "react-redux";
-import { getGifs } from "../redux/actions";
+import { getGifs, getFav } from "../redux/actions";
 
 export default function TrendingScreen({ navigation }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(getFav());
     dispatch(getGifs());
-  }, [dispatch]);
-
+  }, [dispatch, favourites]);
+  const { gifs, favourites, filtered } = useSelector(
+    (state) => state.userReducer
+  );
   // const [gifs, setGifs] = useState([]);
   // const [cat, setCat] = useState([]);
   // useEffect(()=> {
