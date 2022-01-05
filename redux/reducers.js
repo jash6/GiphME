@@ -4,6 +4,7 @@ import {
   GIFS_LIST_SUCCESS,
   GIFS_LIST_FAIL,
   SEARCH_GIFS,
+  REMOVE_FAV,
 } from "./actions";
 
 const initialState = {
@@ -29,7 +30,11 @@ function userReducer(state = initialState, action) {
         ...state,
         favourites: action.payload,
       };
-
+    case REMOVE_FAV:
+      return {
+        ...state,
+        favourites: action.payload.res,
+      };
     case SEARCH_GIFS:
       return {
         ...state,

@@ -73,6 +73,29 @@ export const getFav = () => async (dispatch) => {
     });
 };
 
+export const removeFav = (item) => async (dispatch) => {
+  const db = firebase.firestore();
+  const response = await db
+    .collection("favourites")
+    .where("title", "==", item.title);
+  response.get().then(function (querySnapshot) {
+    querySnapshot.forEach(function (doc) {
+      const favs = Store.getState().userReducer.favourites;
+
+      const res = favs.filter((x) => x.title !== doc.data().title);
+      const result = {
+        res: res,
+      };
+
+      dispatch({
+        type: REMOVE_FAV,
+        payload: result,
+      });
+      doc.ref.delete();
+    });
+  });
+};
+
 export const search = (text) => (dispatch) => {
   const gifs2 = Store.getState().userReducer.gifs;
   const result = gifs2.filter((x) => x.title.includes(text));
