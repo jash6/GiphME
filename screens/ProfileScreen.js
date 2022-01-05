@@ -25,24 +25,15 @@ export default function ProfileScreen() {
             key={index}
             activeOpacity={1}
             style={{ marginBottom: 30 }}
-            onPress={() =>
-              navigation.navigate("Details", {
-                title: gif.title,
-                images: gif.image,
-                trending_datetime: gif.trending_datetime,
-                create_datetime: gif.create_datetime,
-                rating: gif.rating,
-                gif: gif,
-              })
-            }
           >
             <View
               style={{ marginTop: 10, padding: 15, backgroundColor: "white" }}
             >
               {/* <GiphImage image={gif.images.original.url}  /> */}
+              {console.log(gif.gif.images.preview_gif)}
               <Image
                 source={{
-                  uri: gif.image,
+                  uri: gif.gif.images.preview_gif.url,
                 }}
                 style={{ width: "100%", height: 180 }}
               />

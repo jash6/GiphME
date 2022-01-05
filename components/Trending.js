@@ -41,7 +41,7 @@ export default function Trending({ navigation }) {
           onPress={() =>
             navigation.navigate("Details", {
               title: gif.title,
-              images: gif.images.original.url,
+              images: gif.images.downsized.url,
               trending_datetime: gif.trending_datetime,
               create_datetime: gif.create_datetime,
               rating: gif.rating,
@@ -55,7 +55,7 @@ export default function Trending({ navigation }) {
             {/* <GiphImage image={gif.images.original.url}  /> */}
             <Image
               source={{
-                uri: gif.images.original.url,
+                uri: gif.images.preview_gif.url,
               }}
               style={{ width: "100%", height: 180 }}
             />
