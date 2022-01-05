@@ -4,7 +4,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import TrendingScreen from "./screens/TrendingScreen";
 import Details from "./components/Details";
-import SearchScreen from "./screens/SearchScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import BrowseScreen from "./screens/BrowseScreen";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";

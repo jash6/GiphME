@@ -40,7 +40,7 @@ export const getGifs = () => async (dispatch) => {
 export const addFav = (item) => (dispatch) => {
   const gif = {
     title: item.title,
-    image: item.images.original.url,
+    image: item.images.preview_gif.url,
   };
   const db = firebase.firestore();
   db.collection("favourites").add({

@@ -29,10 +29,9 @@ export default function ProfileScreen() {
             <View
               style={{ marginTop: 10, padding: 15, backgroundColor: "white" }}
             >
-              {console.log(gif.gif.images.preview_gif)}
               <Image
                 source={{
-                  uri: gif.gif.images.preview_gif.url,
+                  uri: gif.image,
                 }}
                 style={{ width: "100%", height: 180 }}
               />
