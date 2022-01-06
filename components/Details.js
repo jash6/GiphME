@@ -8,9 +8,9 @@ import {
 } from "react-native";
 import { Divider } from "react-native-elements";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import BottomTabs from "./BottomTabs";
 import { useSelector, useDispatch } from "react-redux";
-import { addFav } from "../redux/actions";
+import { removeFav, addFav } from "../redux/actions";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function Details({ route, navigation }) {
   const { title, images, trending_datetime, create_datetime, rating, gif } =
@@ -26,48 +26,70 @@ export default function Details({ route, navigation }) {
   }
   return (
     <SafeAreaView>
-      <GifName name={title} navigation={navigation} />
-      <GifImage image={images} />
-      <Text
-        style={{
-          fontWeight: "400",
-          fontSize: 20,
-          fontWeight: "bold",
-          marginBottom: 20,
-          marginLeft: 20,
-        }}
-      >
-        Details:
-      </Text>
-      <GifDescription
-        text={"Trending Date and Time"}
-        item={trending_datetime}
-      />
-      <GifDescription text={"Create Date and Time"} item={create_datetime} />
-      <GifDescription text={"Rating"} item={rating} />
-      {!exist ? (
-        <TouchableOpacity
-          onPress={() => {
-            dispatch(addFav(gif));
+      <ScrollView>
+        <GifName name={title} navigation={navigation} />
+        <GifImage image={images} />
+        <Text
+          style={{
+            fontWeight: "400",
+            fontSize: 20,
+            fontWeight: "bold",
+            marginBottom: 20,
+            marginLeft: 20,
           }}
         >
-          <View style={{ alignItems: "center" }}>
-            <FontAwesome5
-              name="heart"
-              size={40}
-              style={{
-                marginBottom: 3,
-                alignSelf: "center",
+          Details:
+        </Text>
+        <GifDescription
+          text={"Trending Date and Time"}
+          item={trending_datetime}
+        />
+        <GifDescription text={"Create Date and Time"} item={create_datetime} />
+        <GifDescription text={"Rating"} item={rating} />
+        {!exist ? (
+          favourites.length < 5 ? (
+            <TouchableOpacity
+              onPress={() => {
+                dispatch(addFav(gif));
               }}
-            />
-            <Text style={{ fontWeight: "bold" }}>Add To Favourites</Text>
-          </View>
-        </TouchableOpacity>
-      ) : (
-        <Text>Added to Favourites</Text>
-      )}
-
-      <BottomTabs />
+            >
+              <View style={{ alignItems: "center" }}>
+                <FontAwesome5
+                  name="heart"
+                  size={40}
+                  style={{
+                    marginBottom: 3,
+                    alignSelf: "center",
+                  }}
+                />
+                <Text style={{ fontWeight: "bold" }}>Add To Favourites</Text>
+              </View>
+            </TouchableOpacity>
+          ) : (
+            <Text style={{ fontWeight: "bold" }}>Disabled</Text>
+          )
+        ) : (
+          <TouchableOpacity
+            onPress={() => {
+              dispatch(removeFav(gif));
+            }}
+          >
+            <View style={{ alignItems: "center" }}>
+              <FontAwesome5
+                name="heart"
+                size={40}
+                style={{
+                  marginBottom: 3,
+                  alignSelf: "center",
+                  color: "red",
+                }}
+                solid
+              />
+              <Text style={{ fontWeight: "bold" }}>Added to Favourites</Text>
+            </View>
+          </TouchableOpacity>
+        )}
+      </ScrollView>
     </SafeAreaView>
   );
 }

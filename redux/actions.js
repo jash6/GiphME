@@ -49,9 +49,10 @@ export const addFav = (item) => (dispatch) => {
     createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     gif: item,
   });
+
   dispatch({
     type: ADD_FAV,
-    payload: item,
+    payload: gif,
   });
 };
 

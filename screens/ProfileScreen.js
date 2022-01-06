@@ -9,6 +9,7 @@ import {
   Button,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { removeFav } from "../redux/actions";
 
 export default function ProfileScreen() {
@@ -49,24 +50,24 @@ export default function ProfileScreen() {
                     {gif.title}
                   </Text>
                 </View>
-                <Button
-                  title="Remove"
+                <TouchableOpacity
                   onPress={() => {
                     dispatch(removeFav(gif));
                   }}
-                />
-                <View
-                  style={{
-                    backgroundColor: "#eee",
-                    height: 30,
-                    width: 30,
-                    alignItems: "center",
-                    justifyContent: "center",
-                    borderRadius: 15,
-                  }}
                 >
-                  <Text>{gif.rating}</Text>
-                </View>
+                  <View style={{ alignItems: "center" }}>
+                    <FontAwesome5
+                      name="heart"
+                      size={20}
+                      style={{
+                        marginBottom: 3,
+                        alignSelf: "flex-end",
+                        color: "red",
+                      }}
+                      solid
+                    />
+                  </View>
+                </TouchableOpacity>
               </View>
             </View>
           </TouchableOpacity>

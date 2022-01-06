@@ -8,7 +8,8 @@ import {
   Button,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { addFav } from "../redux/actions";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import { addFav, removeFav } from "../redux/actions";
 
 export default function Trending({ navigation }) {
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ export default function Trending({ navigation }) {
           onPress={() =>
             navigation.navigate("Details", {
               title: gif.title,
-              images: gif.images.downsized.url,
+              images: gif.images.preview_gif.url,
               trending_datetime: gif.trending_datetime,
               create_datetime: gif.create_datetime,
               rating: gif.rating,
@@ -72,7 +73,7 @@ export default function Trending({ navigation }) {
                 </Text>
               </View>
 
-              {favourites.includes(gif) || exist.includes(gif) ? (
+              {/* {favourites.includes(gif) || exist.includes(gif) ? (
                 <Button title="Fav" />
               ) : favourites.length < 5 ? (
                 <Button
@@ -83,19 +84,46 @@ export default function Trending({ navigation }) {
                 />
               ) : (
                 <Button title="Disabled" />
+              )} */}
+              {favourites.includes(gif) || exist.includes(gif) ? (
+                <TouchableOpacity
+                  onPress={() => {
+                    dispatch(removeFav(gif));
+                  }}
+                >
+                  <View style={{ alignItems: "center" }}>
+                    <FontAwesome5
+                      name="heart"
+                      size={20}
+                      style={{
+                        marginBottom: 3,
+                        alignSelf: "flex-end",
+                        color: "red",
+                      }}
+                      solid
+                    />
+                  </View>
+                </TouchableOpacity>
+              ) : favourites.length < 5 ? (
+                <TouchableOpacity
+                  onPress={() => {
+                    dispatch(addFav(gif));
+                  }}
+                >
+                  <View style={{ alignItems: "center" }}>
+                    <FontAwesome5
+                      name="heart"
+                      size={20}
+                      style={{
+                        marginBottom: 3,
+                        alignSelf: "flex-end",
+                      }}
+                    />
+                  </View>
+                </TouchableOpacity>
+              ) : (
+                <Text>Disabled</Text>
               )}
-              <View
-                style={{
-                  backgroundColor: "#eee",
-                  height: 30,
-                  width: 30,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  borderRadius: 15,
-                }}
-              >
-                <Text>{gif.rating}</Text>
-              </View>
             </View>
           </View>
         </TouchableOpacity>
